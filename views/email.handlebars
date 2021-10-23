@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Welcome Email</title>
+</head>
+<body>
+
+<p>You got a new message from <strong>{{name}}</strong></p>
+<p>phone - ({{phone}}):</p>
+<h2 style="text-align: center;">Запросить запчасти</h2>
+<div style="display: flex; flex-wrap: wrap;">
+    <table style="border-collapse: collapse; width: 30%; margin-right: 20px" border="1">
+        <thead>
+        <tr style="height: 18px;">
+            <th style="height: 36px;" colspan="2">Auto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Марка</td>
+            <td style="height: 18px;">{{message.brand}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Модель</td>
+            <td style="height: 18px;">{{message.model}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Поколение</td>
+            <td style="height: 18px;">{{message.generation}}</td>
+        </tr>
+        <tr style="height: 36px;">
+            <td style="height: 36px;">Объем двигателя</td>
+            <td style="height: 36px;">{{message.engineVolume}}</td>
+        </tr>
+        <tr style="height: 36px;">
+            <td style="height: 36px;">Тип двигателя</td>
+            <td style="height: 36px;">{{message.engineType}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Мощность</td>
+            <td style="height: 18px;">{{message.enginePower}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Привод</td>
+            <td style="height: 18px;">{{message.drive}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Тип кузова</td>
+            <td style="height: 18px;">{{message.body}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">КПП</td>
+            <td style="height: 18px;">{{message.transmission}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Код кузова</td>
+            <td style="height: 18px;">{{message.bodyNumber}}</td>
+        </tr>
+        <tr style="height: 36px;">
+            <td style="height: 36px;">Код двигателя</td>
+            <td style="height: 36px;">{{message.engineNumber}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Рынок</td>
+            <td style="height: 18px;">{{message.market}}</td>
+        </tr>
+        <tr style="height: 36px;">
+            <td style="height: 36px;">VIN или Frame</td>
+            <td style="height: 36px;">{{message.vinFrame}}</td>
+        </tr>
+        <tr style="height: 18px;">
+            <td style="height: 18px;">Заметка</td>
+            <td style="height: 18px;">{{message.notes}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table style="border-collapse: collapse; width: 100%;" border="1">
+        <thead>
+        <tr>
+            <th style="height: 18px;" colspan="4">Details</th>
+        </tr>
+        <tr style="height: 18px;">
+            <th style="height: 18px;">Name</th>
+            <th style="height: 18px;">Comment</th>
+            <th style="height: 18px;">Detail Original Number</th>
+            <th style="height: 18px;">Images</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each message.details}}
+            <tr>
+                <td style="height: 18px;">{{this.detailName}}</td>
+                <td style="height: 18px;">{{this.comment}}</td>
+                <td style="height: 18px;">{{this.detailOriginalNumber}}</td>
+                <td style="display: flex; margin-right: 10px; align-items: flex-start; border: none">
+                    {{#each images}}
+                        <img src="cid:{{this.fileName}}" alt="img" style="width: 150px; height: 150px; margin-right: 10px; "/>
+                    {{/each}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+<div style="margin-top: 20px; display: flex; align-items: flex-start">
+    {{#each message.photoSts}}
+        <div style="display: flex; margin-right: 10px; width: 200px; align-items: flex-start;">
+            <img src="cid:{{this.fileName}}" alt="img" style="width: 100%;"/>
+        </div>
+    {{/each}}
+</div>
+</body>
+</html>
