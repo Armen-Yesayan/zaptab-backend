@@ -67,8 +67,7 @@ app.post('/api/send', async (req, res) => {
 
     let mailOptions = {
         from: "Client support <armeny56@gmail.com>",
-        // to: 'egsiolgo@gmail.com',
-        to: 'armeny56@gmail.com',
+        to: 'egsiolgo@gmail.com',
         subject: 'New message from ZapTab.ru',
         template: 'email',
         context: {
@@ -105,8 +104,7 @@ app.post('/api/send', async (req, res) => {
 
 
     const send1 = await transporter.sendMail(mailOptions);
-    // mailOptions.to = 'zagirov.azamat@gmail.com';
-    mailOptions.to = 'armeny56@gmail.com';
+    mailOptions.to = 'zagirov.azamat@gmail.com';
     const send2 = await transporter.sendMail(mailOptions);
 
     if (send1 && send2) {
