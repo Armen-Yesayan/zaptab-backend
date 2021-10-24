@@ -21,14 +21,16 @@ app.post('/api/send', async (req, res) => {
         message.details.map(item => {
             if (item.images.length) {
                 item.images.map(image => {
-                    let id = uuid.v4();
-                    let fileName = __dirname + `/uploads/image-${id}.jpg`;
-                    image.fileName = fileName;
-                    let base64Data = image.base64.url.replace(`data:${image.base64.type};base64,`, "");
+                    if (image.base64) {
+                        let id = uuid.v4();
+                        let fileName = __dirname + `/uploads/image-${id}.jpg`;
+                        image.fileName = fileName;
+                        let base64Data = image.base64.url.replace(`data:${image.base64.type};base64,`, "");
 
-                    require("fs").writeFile(fileName, base64Data, 'base64', function (err) {
-                        console.log(err);
-                    });
+                        require("fs").writeFile(fileName, base64Data, 'base64', function (err) {
+                            console.log(err);
+                        });
+                    }
                 })
             }
         })
@@ -36,14 +38,16 @@ app.post('/api/send', async (req, res) => {
 
     if (message.photoSts) {
         message.photoSts.map(item => {
-            let id = uuid.v4();
-            let fileName = __dirname + `/uploads/image-${id}.jpg`;
-            item.fileName = fileName;
-            let base64Data = item.base64.url.replace(`data:${item.base64.type};base64,`, "");
+            if(item.base64) {
+                let id = uuid.v4();
+                let fileName = __dirname + `/uploads/image-${id}.jpg`;
+                item.fileName = fileName;
+                let base64Data = item.base64.url.replace(`data:${item.base64.type};base64,`, "");
 
-            require("fs").writeFile(fileName, base64Data, 'base64', function (err) {
-                console.log(err);
-            });
+                require("fs").writeFile(fileName, base64Data, 'base64', function (err) {
+                    console.log(err);
+                });
+            }
         })
     }
 
