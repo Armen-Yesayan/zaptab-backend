@@ -11,22 +11,24 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 const port = process.env.PORT || 5000;
 
-const sendEmail = async (message, template, res) => {
+const sendEmail = async (message, template, res, id) => {
     let mailOptions = {
         from: "Client support <armeny56@gmail.com>",
-        to: 'egsiolgo@gmail.com',
+        // to: 'egsiolgo@gmail.com',
+        to: 'armeny56@gmail.com',
         subject: 'New message from ZapTab.ru',
         template,
         context: {
             message,
+            id
         },
     };
 
     const send1 = await transporter.sendMail(mailOptions);
-    mailOptions.to = 'zagirov.azamat@gmail.com';
-    const send2 = await transporter.sendMail(mailOptions);
+    // mailOptions.to = 'zagirov.azamat@gmail.com';
+    // const send2 = await transporter.sendMail(mailOptions);
 
-    if (send1 && send2) {
+    if (send1) {
         res.json({status: 'success'});
     } else {
         res.json({status: 'error', message: 'Internal Server Error'})
@@ -38,10 +40,11 @@ app.post('/api/send', async (req, res) => {
     await sendEmail(message, 'email', res)
 })
 
-app.post('/api/call-me', async (req, res) => {
+app.post('/api/call-me/:id', async (req, res) => {
+    const {id} = req.params;
     const {message} = req.body;
 
-    await sendEmail(message, 'call-me', res)
+    await sendEmail(message, 'call-me', res, id)
 })
 
 app.get('/', (req, res) => {
