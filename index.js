@@ -14,8 +14,7 @@ const port = process.env.PORT || 5000;
 const sendEmail = async (message, template, res, id) => {
     let mailOptions = {
         from: "Client support <armeny56@gmail.com>",
-        // to: 'egsiolgo@gmail.com',
-        to: 'armeny56@gmail.com',
+        to: 'egsiolgo@gmail.com',
         subject: 'New message from ZapTab.ru',
         template,
         context: {
@@ -25,10 +24,10 @@ const sendEmail = async (message, template, res, id) => {
     };
 
     const send1 = await transporter.sendMail(mailOptions);
-    // mailOptions.to = 'zagirov.azamat@gmail.com';
-    // const send2 = await transporter.sendMail(mailOptions);
+    mailOptions.to = 'zagirov.azamat@gmail.com';
+    const send2 = await transporter.sendMail(mailOptions);
 
-    if (send1) {
+    if (send1 && send2) {
         res.json({status: 'success'});
     } else {
         res.json({status: 'error', message: 'Internal Server Error'})
