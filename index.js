@@ -15,7 +15,7 @@ const sendEmail = async (message, template, res, id) => {
     let mailOptions = {
         from: "Client support <armeny56@gmail.com>",
         to: 'egsiolgo@gmail.com',
-        subject: 'New message from ZapTab.ru',
+        subject: "New message in " + message.from,
         template,
         context: {
             message,
